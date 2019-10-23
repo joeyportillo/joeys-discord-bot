@@ -57,16 +57,14 @@ client.on("message", async message => {
   const command = args.shift().toLowerCase();
 
   // Let's go with a few common example commands! Feel free to delete or change those.
-  // new commands
-  
-  
-  
-  // old commands
+
   if (command === "mm-art") {
     const yiff1Embed = new Discord.RichEmbed()
       .setColor("#0099ff")
       .setTitle("meme masters art")
-      .setImage("https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2Funknown.png?v=1571797176151")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2Funknown.png?v=1571797176151"
+      )
       .setTimestamp();
 
     message.channel.send(yiff1Embed);
