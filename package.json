@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "discord.js": "^11.5.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "spotify": "^0.3.0",
+    "passport-spotify": "^1.1.0"
   },
   "engines": {
     "node": "10.x"

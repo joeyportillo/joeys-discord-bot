@@ -13,6 +13,37 @@ const config = require("./bot stuff/config.json");
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
+
+  //tells how long the bot has been up
+  let totalSeconds = client.uptime / 1000;
+  let days = Math.floor(totalSeconds / 86400);
+  let hours = Math.floor(totalSeconds / 3600);
+  totalSeconds %= 3600;
+  let minutes = Math.floor(totalSeconds / 60);
+  let seconds = totalSeconds % 60;
+
+  let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+
+  //send message to support server
+  client.channels
+    .get("636728350932729857")
+    .send(
+      "<@609717155608657922> I have successfully started up and I am now ready to serve"
+    );
+
+  //keeps bot up by ping 
+  const http = require("http");
+  const express = require("express");
+  const app = express();
+  app.get("/", (request, response) => {
+    console.log(Date.now() + " Ping Received");
+    response.sendStatus(200);
+  });
+  app.listen(process.env.PORT);
+  setInterval(() => {
+    http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+  }, 280000);
+
   console.log(
     `Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`
   );
@@ -58,15 +89,69 @@ client.on("message", async message => {
 
   // Let's go with a few common example commands! Feel free to delete or change those.
   // new commands
-  
-  
-  
+
+  if (command === "dm-test") {
+    message.author.sendMessage("hello");
+  }
+
+  if (command === "yiff-pikachu") {
+    const Pikachu1Embed = new Discord.RichEmbed()
+      .setColor("#0099ff")
+      .setTitle("Pikachu yiff 1")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2FPikachu%201.gif?v=1571838463489"
+      );
+    message.channel.send(Pikachu1Embed);
+
+    const pikachu2Embed = new Discord.RichEmbed()
+      .setColor("#0099ff")
+      .setTitle("pikachu yiff 2")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2FPikachu%202.gif?v=1571838479258"
+      );
+    message.channel.send(pikachu2Embed);
+
+    const pikachu3Embed = new Discord.RichEmbed()
+      .setColor("#0099ff")
+      .setTitle("pikachu yiff 3")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2FPikachu%203.gif?v=1571838491147"
+      );
+    message.channel.send(pikachu3Embed);
+
+    const pikachu4Embed = new Discord.RichEmbed()
+      .setColor("#0099ff")
+      .setTitle("pikachu yiff 4")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2FPikachu%204.gif?v=1571838503497"
+      );
+    message.channel.send(pikachu4Embed);
+
+    const pikachu5Embed = new Discord.RichEmbed()
+      .setColor("#0099ff")
+      .setTitle("pikachu yiff 5")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2FPikachu%205.gif?v=1571838514403"
+      );
+    message.channel.send(pikachu5Embed);
+
+    const pikachu6Embed = new Discord.RichEmbed()
+      .setColor("#0099ff")
+      .setTitle("pikachu yiff 6")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2FPikachu%206.gif?v=1571838538542"
+      );
+    message.channel.send(pikachu6Embed);
+  }
+
   // old commands
   if (command === "mm-art") {
     const yiff1Embed = new Discord.RichEmbed()
       .setColor("#0099ff")
       .setTitle("meme masters art")
-      .setImage("https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2Funknown.png?v=1571797176151")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2Funknown.png?v=1571797176151"
+      )
       .setTimestamp();
 
     message.channel.send(yiff1Embed);
@@ -102,7 +187,7 @@ client.on("message", async message => {
 
     message.channel.send(yiff3Embed);
 
-    console.log("yiff used");
+    console.log("yiff cub used");
   }
 
   if (command === "quit") {
@@ -115,13 +200,15 @@ client.on("message", async message => {
     const memeEmbed = new Discord.RichEmbed()
       .setColor("#0099ff")
       .setTitle("meme")
-      .setImage("")
+      .setImage(
+        "https://cdn.glitch.com/d83579cd-10b5-469f-8797-fdafa40eea5e%2Funknown-1.png?v=1571874069031 "
+      )
       .setTimestamp();
 
     message.channel.send(memeEmbed);
   }
 
-   if (command === "vr") {
+  if (command === "vr") {
     const helpEmbed = new Discord.RichEmbed()
       .setColor("#808080")
       .setTitle("version")
@@ -131,7 +218,7 @@ client.on("message", async message => {
 
     message.channel.send(helpEmbed);
     console.log("help used");
-   }
+  }
   if (command === "help") {
     const helpEmbed = new Discord.RichEmbed()
       .setColor("#808080")
@@ -140,13 +227,19 @@ client.on("message", async message => {
       .setDescription("commands for joeys discord bot stable version")
       .addField("miscellaneous commands", "say, ping, vr, meme, mm-art", true)
       .addField("NSFW commands", "yiff-cub", true)
-      .addField("administration commands", "ban, kick, Purge", true)
       .setTimestamp();
-
+    
+    message.author.sendMessage("administration commands are ban, kick, purge");
+    
     message.channel.send(helpEmbed);
     console.log("help used");
   }
 
+  if (command === "uptime"){
+    
+ 
+  }
+  
   if (command === "ping") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
